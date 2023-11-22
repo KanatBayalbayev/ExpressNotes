@@ -1,8 +1,9 @@
 package com.qanatdev.expressnotes.data
 
 import com.qanatdev.expressnotes.domain.Note
+import javax.inject.Inject
 
-class NotesListMapper {
+class NotesListMapper @Inject constructor() {
     fun mapEntityToDbModel(note: Note) = NoteDbModel(
         id = note.id,
         name = note.name,

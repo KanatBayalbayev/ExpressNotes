@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.qanatdev.expressnotes.R
 import com.qanatdev.expressnotes.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener {
 
@@ -16,12 +17,22 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
     private lateinit var shopListAdapter: NotesListAdapter
     private lateinit var binding: ActivityMainBinding
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as NotesApplication).component
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView()
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.shopList.observe(this) {
             shopListAdapter.submitList(it)
         }
@@ -41,7 +52,7 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
     }
 
     private fun isOnePaneMode(): Boolean {
-        return binding.rvNotesList == null
+        return binding.shopItemContainer == null
     }
 
     private fun launchFragment(fragment: Fragment) {
