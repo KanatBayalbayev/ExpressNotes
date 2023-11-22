@@ -1,26 +1,24 @@
 package com.qanatdev.expressnotes.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.qanatdev.expressnotes.data.NotesListRepositoryImpl
 import com.qanatdev.expressnotes.domain.AddNoteUseCase
 import com.qanatdev.expressnotes.domain.EditNoteUseCase
 import com.qanatdev.expressnotes.domain.GetNoteUseCase
 import com.qanatdev.expressnotes.domain.Note
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class NoteViewModel(application: Application) : AndroidViewModel(application) {
+class NoteViewModel @Inject constructor(
+    private val getShopItemUseCase: GetNoteUseCase,
+    private val addShopItemUseCase: AddNoteUseCase,
+    private val editShopItemUseCase: EditNoteUseCase
+) : ViewModel() {
 
-    private val repository = NotesListRepositoryImpl(application)
-
-    private val getShopItemUseCase = GetNoteUseCase(repository)
-    private val addShopItemUseCase = AddNoteUseCase(repository)
-    private val editShopItemUseCase = EditNoteUseCase(repository)
-
+   
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>
         get() = _errorInputName

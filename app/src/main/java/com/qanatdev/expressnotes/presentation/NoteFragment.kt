@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.qanatdev.expressnotes.R
 import com.qanatdev.expressnotes.databinding.FragmentNoteBinding
 import com.qanatdev.expressnotes.domain.Note
+import javax.inject.Inject
 
 class NoteFragment : Fragment() {
 
@@ -25,7 +26,17 @@ class NoteFragment : Fragment() {
     private var screenMode: String = MODE_UNKNOWN
     private var shopItemId: Int = Note.UNDEFINED_ID
 
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (requireActivity().application as NotesApplication).component
+    }
+
+
     override fun onAttach(context: Context) {
+        component.inject(this)
         super.onAttach(context)
         if (context is OnEditingFinishedListener) {
             onEditingFinishedListener = context
@@ -50,7 +61,7 @@ class NoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        noteViewModel = ViewModelProvider(this)[NoteViewModel::class.java]
+        noteViewModel = ViewModelProvider(this, viewModelFactory)[NoteViewModel::class.java]
         binding.viewModel = noteViewModel
         binding.viewModel = noteViewModel
         binding.lifecycleOwner = viewLifecycleOwner

@@ -5,13 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations;
 import com.qanatdev.expressnotes.domain.Note
 import com.qanatdev.expressnotes.domain.NotesListRepository
+import javax.inject.Inject
 
-class NotesListRepositoryImpl(
-    application: Application
+class NotesListRepositoryImpl @Inject constructor(
+    private val notesListDao: NotesListDao,
+    private val mapper: NotesListMapper
 ) : NotesListRepository {
 
-    private val notesListDao = AppDatabase.getInstance(application).notesListDao()
-    private val mapper = NotesListMapper()
+
     override suspend fun addShopItem(note: Note) {
         notesListDao.addShopItem(mapper.mapEntityToDbModel(note))
     }
@@ -26,14 +27,14 @@ class NotesListRepositoryImpl(
 
     override suspend fun getShopItem(noteId: Int): Note {
         val dbModel = notesListDao.getShopItem(noteId)
-        return mapper.mapDbModelToEntity(dbModel)    }
+        return mapper.mapDbModelToEntity(dbModel)
+    }
 
     override fun getShopList(): LiveData<List<Note>> = Transformations.map(
         notesListDao.getShopList()
     ) {
         mapper.mapListDbModelToListEntity(it)
     }
-
 
 
 }
