@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class GetNotesListUseCase @Inject constructor(private val notesListRepository: NotesListRepository) {
 
-    fun getShopList(): LiveData<List<Note>> {
-        return notesListRepository.getShopList()
+    fun getNotesList(): LiveData<List<Note>> {
+        return notesListRepository.getNotesList()
     }
 }

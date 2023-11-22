@@ -11,7 +11,7 @@ import com.qanatdev.expressnotes.domain.Note
 class NoteActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener {
 
     private var screenMode = MODE_UNKNOWN
-    private var shopItemId = Note.UNDEFINED_ID
+    private var noteId = Note.UNDEFINED_ID
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +28,12 @@ class NoteActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
 
     private fun launchRightMode() {
         val fragment = when (screenMode) {
-            MODE_EDIT -> NoteFragment.newInstanceEditItem(shopItemId)
+            MODE_EDIT -> NoteFragment.newInstanceEditItem(noteId)
             MODE_ADD  -> NoteFragment.newInstanceAddItem()
             else      -> throw RuntimeException("Unknown screen mode $screenMode")
         }
         supportFragmentManager.beginTransaction()
-            .replace(R.id.shop_item_container, fragment)
+            .replace(R.id.note_container, fragment)
             .commit()
     }
 
@@ -47,17 +47,17 @@ class NoteActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
         }
         screenMode = mode
         if (screenMode == MODE_EDIT) {
-            if (!intent.hasExtra(EXTRA_SHOP_ITEM_ID)) {
+            if (!intent.hasExtra(EXTRA_NOTE_ID)) {
                 throw RuntimeException("Param shop item id is absent")
             }
-            shopItemId = intent.getIntExtra(EXTRA_SHOP_ITEM_ID, Note.UNDEFINED_ID)
+            noteId = intent.getIntExtra(EXTRA_NOTE_ID, Note.UNDEFINED_ID)
         }
     }
 
     companion object {
 
         private const val EXTRA_SCREEN_MODE = "extra_mode"
-        private const val EXTRA_SHOP_ITEM_ID = "extra_shop_item_id"
+        private const val EXTRA_NOTE_ID = "extra_note_id"
         private const val MODE_EDIT = "mode_edit"
         private const val MODE_ADD = "mode_add"
         private const val MODE_UNKNOWN = ""
@@ -68,10 +68,10 @@ class NoteActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
             return intent
         }
 
-        fun newIntentEditItem(context: Context, shopItemId: Int): Intent {
+        fun newIntentEditItem(context: Context, noteId: Int): Intent {
             val intent = Intent(context, NoteActivity::class.java)
             intent.putExtra(EXTRA_SCREEN_MODE, MODE_EDIT)
-            intent.putExtra(EXTRA_SHOP_ITEM_ID, shopItemId)
+            intent.putExtra(EXTRA_NOTE_ID, noteId)
             return intent
         }
     }

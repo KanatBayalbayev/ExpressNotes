@@ -22,13 +22,13 @@
             tools:listitem="@layout/note_enabled"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_add_shop_item"
+            android:id="@+id/button_add_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:contentDescription="@string/add_shop_item_content_description"
+            android:contentDescription="@string/add_note_content_description"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_middle"
@@ -44,7 +44,7 @@
             />
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/shop_item_container"
+            android:id="@+id/note_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"

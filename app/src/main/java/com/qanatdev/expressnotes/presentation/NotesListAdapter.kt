@@ -13,8 +13,8 @@ import com.qanatdev.expressnotes.domain.Note
 
 class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()) {
 
-    var onShopItemLongClickListener: ((Note) -> Unit)? = null
-    var onShopItemClickListener: ((Note) -> Unit)? = null
+    var onNoteLongClickListener: ((Note) -> Unit)? = null
+    var onNoteClickListener: ((Note) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val layout = when (viewType) {
@@ -35,11 +35,11 @@ class NotesListAdapter : ListAdapter<Note, NoteViewHolder>(NoteDiffCallback()) {
         val note = getItem(position)
         val binding = viewHolder.binding
         binding.root.setOnLongClickListener {
-            onShopItemLongClickListener?.invoke(note)
+            onNoteLongClickListener?.invoke(note)
             true
         }
         binding.root.setOnClickListener {
-            onShopItemClickListener?.invoke(note)
+            onNoteClickListener?.invoke(note)
         }
         when (binding) {
             is NoteDisabledBinding -> {

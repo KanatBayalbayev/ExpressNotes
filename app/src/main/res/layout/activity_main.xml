@@ -22,7 +22,7 @@
             tools:listitem="@layout/note_enabled"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_add_shop_item"
+            android:id="@+id/button_add_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

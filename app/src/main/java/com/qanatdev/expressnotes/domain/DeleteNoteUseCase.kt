@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class DeleteNoteUseCase @Inject constructor(private val notesListRepository: NotesListRepository) {
 
-    suspend fun deleteShopItem(note: Note) {
-        notesListRepository.deleteShopItem(note)
+    suspend fun deleteNote(note: Note) {
+        notesListRepository.deleteNote(note)
     }
 }

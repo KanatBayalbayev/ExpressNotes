@@ -13,9 +13,9 @@ import javax.inject.Inject
 
 
 class NoteViewModel @Inject constructor(
-    private val getShopItemUseCase: GetNoteUseCase,
-    private val addShopItemUseCase: AddNoteUseCase,
-    private val editShopItemUseCase: EditNoteUseCase
+    private val getNotesListUseCase: GetNoteUseCase,
+    private val addNoteUseCase: AddNoteUseCase,
+    private val editNoteUseCase: EditNoteUseCase
 ) : ViewModel() {
 
    
@@ -23,45 +23,41 @@ class NoteViewModel @Inject constructor(
     val errorInputName: LiveData<Boolean>
         get() = _errorInputName
 
-    private val _errorInputCount = MutableLiveData<Boolean>()
-    val errorInputCount: LiveData<Boolean>
-        get() = _errorInputCount
-
-    private val _shopItem = MutableLiveData<Note>()
-    val shopItem: LiveData<Note>
-        get() = _shopItem
+    private val _note = MutableLiveData<Note>()
+    val note: LiveData<Note>
+        get() = _note
 
     private val _shouldCloseScreen = MutableLiveData<Unit>()
     val shouldCloseScreen: LiveData<Unit>
         get() = _shouldCloseScreen
 
-    fun getShopItem(shopItemId: Int) {
+    fun getNote(noteId: Int) {
         viewModelScope.launch {
-            val item = getShopItemUseCase.getShopItem(shopItemId)
-            _shopItem.value = item
+            val item = getNotesListUseCase.getNote(noteId)
+            _note.value = item
         }
     }
 
-    fun addShopItem(inputName: String?) {
+    fun addNote(inputName: String?) {
         val name = parseName(inputName)
         val fieldsValid = validateInput(name)
         if (fieldsValid) {
             viewModelScope.launch {
                 val shopItem = Note(name, true)
-                addShopItemUseCase.addShopItem(shopItem)
+                addNoteUseCase.addNote(shopItem)
                 finishWork()
             }
         }
     }
 
-    fun editShopItem(inputName: String?) {
+    fun editNote(inputName: String?) {
         val name = parseName(inputName)
         val fieldsValid = validateInput(name)
         if (fieldsValid) {
-            _shopItem.value?.let {
+            _note.value?.let {
                 viewModelScope.launch {
                     val item = it.copy(name = name)
-                    editShopItemUseCase.editShopItem(item)
+                    editNoteUseCase.editNote(item)
                     finishWork()
                 }
             }
@@ -72,13 +68,6 @@ class NoteViewModel @Inject constructor(
         return inputName?.trim() ?: ""
     }
 
-    private fun parseCount(inputCount: String?): Int {
-        return try {
-            inputCount?.trim()?.toInt() ?: 0
-        } catch (e: Exception) {
-            0
-        }
-    }
 
     private fun validateInput(name: String): Boolean {
         var result = true
@@ -93,9 +82,6 @@ class NoteViewModel @Inject constructor(
         _errorInputName.value = false
     }
 
-    fun resetErrorInputCount() {
-        _errorInputCount.value = false
-    }
 
     private fun finishWork() {
         _shouldCloseScreen.value = Unit

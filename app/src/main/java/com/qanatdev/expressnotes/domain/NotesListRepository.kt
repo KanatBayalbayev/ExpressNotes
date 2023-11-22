@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 
 interface NotesListRepository {
 
-    suspend fun addShopItem(note: Note)
+    suspend fun addNote(note: Note)
 
-    suspend fun deleteShopItem(note: Note)
+    suspend fun deleteNote(note: Note)
 
-    suspend fun editShopItem(note: Note)
+    suspend fun editNote(note: Note)
 
-    suspend fun getShopItem(noteId: Int): Note
+    suspend fun getNote(noteId: Int): Note
 
-    fun getShopList(): LiveData<List<Note>>
+    fun getNotesList(): LiveData<List<Note>>
 }
 
 

@@ -14,7 +14,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var shopListAdapter: NotesListAdapter
+    private lateinit var notesListAdapter: NotesListAdapter
     private lateinit var binding: ActivityMainBinding
 
     @Inject
@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
         setContentView(binding.root)
         setupRecyclerView()
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        viewModel.shopList.observe(this) {
-            shopListAdapter.submitList(it)
+        viewModel.notesList.observe(this) {
+            notesListAdapter.submitList(it)
         }
-        binding.buttonAddShopItem.setOnClickListener {
+        binding.buttonAddNote.setOnClickListener {
             if (isOnePaneMode()) {
                 val intent = NoteActivity.newIntentAddItem(this)
                 startActivity(intent)
@@ -52,21 +52,21 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
     }
 
     private fun isOnePaneMode(): Boolean {
-        return binding.shopItemContainer == null
+        return binding.noteContainer == null
     }
 
     private fun launchFragment(fragment: Fragment) {
         supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.shop_item_container, fragment)
+            .replace(R.id.note_container, fragment)
             .addToBackStack(null)
             .commit()
     }
 
     private fun setupRecyclerView() {
         with(binding.rvNotesList) {
-            shopListAdapter = NotesListAdapter()
-            adapter = shopListAdapter
+            notesListAdapter = NotesListAdapter()
+            adapter = notesListAdapter
             recycledViewPool.setMaxRecycledViews(
                 NotesListAdapter.VIEW_TYPE_ENABLED,
                 NotesListAdapter.MAX_POOL_SIZE
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
         setupSwipeListener(binding.rvNotesList)
     }
 
-    private fun setupSwipeListener(rvShopList: RecyclerView) {
+    private fun setupSwipeListener(rvNotesList: RecyclerView) {
         val callback = object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
@@ -96,16 +96,16 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = shopListAdapter.currentList[viewHolder.adapterPosition]
-                viewModel.deleteShopItem(item)
+                val item = notesListAdapter.currentList[viewHolder.adapterPosition]
+                viewModel.deleteNote(item)
             }
         }
         val itemTouchHelper = ItemTouchHelper(callback)
-        itemTouchHelper.attachToRecyclerView(rvShopList)
+        itemTouchHelper.attachToRecyclerView(rvNotesList)
     }
 
     private fun setupClickListener() {
-        shopListAdapter.onShopItemClickListener = {
+        notesListAdapter.onNoteClickListener = {
             if (isOnePaneMode()) {
                 val intent = NoteActivity.newIntentEditItem(this, it.id)
                 startActivity(intent)
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
     }
 
     private fun setupLongClickListener() {
-        shopListAdapter.onShopItemLongClickListener = {
+        notesListAdapter.onNoteLongClickListener = {
             viewModel.changeEnableState(it)
         }
     }
