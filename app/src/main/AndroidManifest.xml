@@ -3,16 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".presentation.NotesApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:name=".presentation.NotesApplication"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/book"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ExpressNotes"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.WelcomeActivity"
+            android:exported="false">
+
+
+        </activity>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true">

@@ -62,11 +62,11 @@ class NoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         noteViewModel = ViewModelProvider(this, viewModelFactory)[NoteViewModel::class.java]
         binding.viewModel = noteViewModel
-        binding.viewModel = noteViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         addTextChangeListeners()
         launchRightMode()
         observeViewModel()
+        backToMainActivity()
     }
 
     private fun observeViewModel() {
@@ -110,6 +110,12 @@ class NoteFragment : Fragment() {
             noteViewModel.addNote(
                 binding.etName.text?.toString()
             )
+        }
+    }
+
+    private fun backToMainActivity(){
+        binding.buttonBack.setOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 

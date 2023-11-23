@@ -1,7 +1,11 @@
 package com.qanatdev.expressnotes.presentation
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -31,11 +35,22 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        launchWelcomeActivity()
+
         setupRecyclerView()
+
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.notesList.observe(this) {
             notesListAdapter.submitList(it)
+            if (it.isNotEmpty()){
+                binding.mainLogo?.visibility = View.GONE
+            } else {
+                binding.mainLogo?.visibility = View.VISIBLE
+            }
         }
+
+
         binding.buttonAddNote.setOnClickListener {
             if (isOnePaneMode()) {
                 val intent = NoteActivity.newIntentAddItem(this)
@@ -44,11 +59,20 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
                 launchFragment(NoteFragment.newInstanceAddItem())
             }
         }
+
     }
 
     override fun onEditingFinished() {
-        Toast.makeText(this@MainActivity, "Success", Toast.LENGTH_SHORT).show()
         supportFragmentManager.popBackStack()
+    }
+
+    private fun launchWelcomeActivity(){
+        val prefs: SharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val firstRun: Boolean = prefs.getBoolean(KEY_FIRST_RUN, true)
+
+        if (firstRun) {
+            startActivity(Intent(this, WelcomeActivity::class.java))
+        }
     }
 
     private fun isOnePaneMode(): Boolean {
@@ -119,5 +143,10 @@ class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener
         notesListAdapter.onNoteLongClickListener = {
             viewModel.changeEnableState(it)
         }
+    }
+
+    companion object{
+        private val PREFS_NAME = "MyPrefsFile"
+        private val KEY_FIRST_RUN = "firstRun"
     }
 }

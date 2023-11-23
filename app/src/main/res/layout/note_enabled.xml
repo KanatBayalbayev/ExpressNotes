@@ -20,13 +20,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         app:cardCornerRadius="4dp"
+        app:cardUseCompatPadding="true"
         app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_purple"
+            android:background="#149bd6"
             android:orientation="horizontal"
             android:padding="16dp">
 
@@ -35,14 +36,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:text="@{note.name}"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="Салфетки" />
+                tools:text="Запись" />
 
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+
 </layout>

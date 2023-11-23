@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Express Notes</string>
+    <string name="add_note_content_description">Добавить новую заметку</string>
+    <string name="name_hint">Заметка:</string>
+    <string name="count_hint">Счет:</string>
+    <string name="save_btn">Сохранить</string>
+    <string name="error_input_name">Пустой поле ввода</string>
+    <string name="adding_note">добавление_заметки</string>
+    <string name="mainlogo">главноеЛого</string>
+    <string name="expressnotes">ExpressNotes</string>
+    <string name="pen">ручка</string>
+    <string name="buttontoback">кнопка назад</string>
+    <string name="welcomeText">Добро пожаловать в \nExpressNotes</string>
+    <string name="instructions">⚡ Легко создавайте новые заметки, вводя текст в специальное поле ввода.\n⚡ Избавляйтесь от ненужных записей свайпом влево или вправо на элементе заметки.\n⚡ Редактируйте заметки простым нажатием. Откройте режим редактирования, чтобы внести изменения.\n⚡ Отмечайте заметки как выполненные долгим нажатием на элемент.</string>
+    <string name="desc">ExpressNotes - приложение для заметок предназначено для создания записей и обеспечивает удобное управление вашими данными</string>
+    <string name="get_started">Начать</string>
+</resources>

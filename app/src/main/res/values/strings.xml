@@ -1,11 +1,17 @@
 <resources>
-    <string name="app_name">Shopping List</string>
-    <string name="add_note_content_description">Add new shop item</string>
-    <string name="name_hint">Name:</string>
+    <string name="app_name">Express Notes</string>
+    <string name="add_note_content_description">Add new note</string>
+    <string name="name_hint">Note:</string>
     <string name="count_hint">Count:</string>
     <string name="save_btn">Save</string>
-    <string name="error_input_name">Invalid name</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="error_input_name">Empty input field</string>
     <string name="adding_note">adding_note</string>
+    <string name="mainlogo">mainLogo</string>
+    <string name="expressnotes">ExpressNotes</string>
+    <string name="pen">pen</string>
+    <string name="buttontoback">buttonToBack</string>
+    <string name="welcomeText">Welcome to ExpressNotes</string>
+    <string name="instructions">⚡ Easily create new notes by entering text in the designated input field.\n⚡ Get rid of unnecessary entries with a left or right swipe on the note item.\n⚡ Edit notes with a simple tap. Open the editing mode to make changes.\n⚡ Mark notes as completed with a long press on the item.</string>
+    <string name="desc">ExpressNotes - the note-taking app is for creating notes, providing convenient management of your records</string>
+    <string name="get_started">Get Started</string>
 </resources>

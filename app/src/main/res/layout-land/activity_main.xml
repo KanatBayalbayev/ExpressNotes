@@ -22,18 +22,31 @@
             tools:listitem="@layout/note_enabled"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/button_add_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:clickable="true"
+            android:visibility="gone"
             android:contentDescription="@string/add_note_content_description"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline_middle"
             app:srcCompat="@android:drawable/ic_input_add"
             />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/button_add_note"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_middle"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/yellowbuttonplus" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_middle"
