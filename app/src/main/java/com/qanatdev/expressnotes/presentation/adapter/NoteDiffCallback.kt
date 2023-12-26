@@ -1,4 +1,4 @@
-package com.qanatdev.expressnotes.presentation
+package com.qanatdev.expressnotes.presentation.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.qanatdev.expressnotes.domain.Note

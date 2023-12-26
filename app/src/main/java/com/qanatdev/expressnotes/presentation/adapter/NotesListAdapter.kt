@@ -1,4 +1,4 @@
-package com.qanatdev.expressnotes.presentation
+package com.qanatdev.expressnotes.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

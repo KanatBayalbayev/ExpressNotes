@@ -6,13 +6,13 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.qanatdev.expressnotes.R
 import com.qanatdev.expressnotes.databinding.ActivityMainBinding
+import com.qanatdev.expressnotes.presentation.adapter.NotesListAdapter
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NoteFragment.OnEditingFinishedListener {
