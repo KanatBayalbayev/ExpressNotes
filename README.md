@@ -1,3 +1,6 @@
+https://github.com/KanatBayalbayev/ArithmetiQuest/assets/115481348/7df3c833-165b-4be6-a825-d05ae4396c07
+
+
 <img src="https://github.com/KanatBayalbayev/ExpressNotes/assets/115481348/32cf2406-bf0d-4508-a6b9-c7233796d39b" width="310" height="700"><img src="https://github.com/KanatBayalbayev/ExpressNotes/assets/115481348/1c5b5dcf-c247-4edb-9549-1a5bcf8d1abc" width="310" height="700">
 <img src="https://github.com/KanatBayalbayev/ExpressNotes/assets/115481348/7c4d268e-c4b3-4e45-9c0a-a706971f9a61" width="310" height="700"> <img src="https://github.com/KanatBayalbayev/ExpressNotes/assets/115481348/18616628-35fe-433e-bc15-3b6c030042c5" width="310" height="700">
 
